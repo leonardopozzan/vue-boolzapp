@@ -1,0 +1,86 @@
+/*************************** Common *****************************/
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.wrapper{
+    height: 100vh;
+    background: linear-gradient(180deg, rgb(21, 124, 119) 15%, rgb(200, 200, 200) 15%);
+}
+div{
+    border: 1px solid black;
+}
+#app{
+    height: 90%;
+    width: 80%;
+}
+img{
+    max-width: 100%;
+}
+.my-flex{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/*************************** lista chat a sinistra *****************************/
+.menu-chat > *{
+    padding: 5px   ;
+}
+.header{
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #EAEAEA;
+}
+.icons{
+    color: #B1B1B1;
+}  
+.my-pic-profile{
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: white;
+}
+.notify{
+    background-color: #8EDAFC;
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
+.notify span{
+    font-size: 14px;
+}
+.notify .pic-profile{
+    background-color: white;
+    color: #8EDAFC;
+}
+.pic-profile{
+    height: 55px;
+    width: 55px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.input-bar{
+    background-color: #FAFAFA;
+}
+.input-bar button{
+    background-color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 0;
+    border-right: 2px solid #B1B1B1;
+    color: #B1B1B1;
+    border-radius: 5px 0 0 5px;
+}
+.input-bar input{
+    border: 0;
+    border-radius: 0 5px 5px 0;
+}
+.chat{
+    height: 60px;
+}
+
