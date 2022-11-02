@@ -40,6 +40,18 @@
                     <input type="text" placeholder="Cerca o inizia una nuova chat" class="flex-grow-1">
                 </div>
                 <div class="list-chat">
+                    <div v-for="(contact, i) in contacts" :key="i" class="chat">
+                        <div class="pic-profile">
+                            <img :src="`img/avatar${contacts[i].avatar}.jpg`">
+                        </div>
+                        <div class="ms-2 name-chat">
+                            <span><b>{{contacts[i].name}}</b></span><br>
+                            <span>{{contacts[i].messages[contacts[i].messages.length - 1].message}}</span>
+                        </div>
+                        <div class="time">{{contacts[i].messages[contacts[i].messages.length - 1].date.substring(11,16)}}</div>
+                    </div>
+                </div>
+                <div class="list-chat">
                     <div v-for="(contact, i) in contacts" :key="i" class="chat" @click="showChat(contact)">
                         <div class="pic-profile">
                             <img :src="`img/avatar${contacts[i].avatar}.jpg`">
