@@ -3,6 +3,7 @@ let id = 0;
 const app = createApp({
     data(){
         return{
+            activeChat: 0,
             contacts: [
                 {
                     id:id++,
@@ -174,6 +175,12 @@ const app = createApp({
                     ],
                 }
             ]
+        }
+    },
+    methods:{
+        showChat(item){
+            const index = this.contacts.findIndex((element)=> element.id == item.id);
+            this.activeChat = index;
         }
     }
 })

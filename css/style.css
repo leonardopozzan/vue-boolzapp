@@ -6,11 +6,11 @@
 }
 .wrapper{
     height: 100vh;
-    background: linear-gradient(180deg, rgb(21, 124, 119) 15%, rgb(200, 200, 200) 15%);
+    background: linear-gradient(180deg, rgb(21, 124, 119) 100px, rgb(200, 200, 200) 0);
 }
-div{
+/* div{
     border: 1px solid black;
-}
+} */
 #app{
     height: 90%;
     width: 80%;
@@ -25,11 +25,15 @@ img{
 }
 
 /*************************** lista chat a sinistra *****************************/
+.menu-chat{
+    border-right: 1px solid #B1B1B1;
+}
 .menu-chat > *{
     padding: 5px   ;
 }
+/* immagine e tasti per profilo personale*/
 .header{
-    height: 50px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -39,15 +43,16 @@ img{
     color: #B1B1B1;
 }  
 .my-pic-profile{
-    height: 45px;
-    width: 45px;
+    height: 55px;
+    width: 55px;
     border-radius: 50%;
     overflow: hidden;
     background-color: white;
 }
+/*barra per impostare le notifiche*/
 .notify{
     background-color: #8EDAFC;
-    height: 60px;
+    height: 70px;
     display: flex;
     align-items: center;
 }
@@ -58,21 +63,17 @@ img{
     background-color: white;
     color: #8EDAFC;
 }
-.pic-profile{
-    height: 55px;
-    width: 55px;
-    border-radius: 50%;
-    overflow: hidden;
-}
+/* barra di ricerca*/
 .input-bar{
-    background-color: #FAFAFA;
+    background-color: #EAEAEA;
+    height: 40px;
 }
 .input-bar button{
     background-color: white;
     padding-left: 10px;
     padding-right: 10px;
     border: 0;
-    border-right: 2px solid #B1B1B1;
+    border-right: 1px solid #B1B1B1;
     color: #B1B1B1;
     border-radius: 5px 0 0 5px;
 }
@@ -80,7 +81,64 @@ img{
     border: 0;
     border-radius: 0 5px 5px 0;
 }
+/* chat dinamiche */
+.list-chat{
+    
+    padding: 0;
+    overflow-y: auto;
+    height: calc(100% - 170px);
+}
 .chat{
+    padding: 5px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    position: relative;
+    border-bottom: 1px solid #B1B1B1;
+}
+.pic-profile{
+    height: 65px;
+    width: 65px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: #F2F2F2;
+}
+.time{
+    position: absolute;
+    top:5px; right: 5px;
+}
+.name-chat{
+    width: calc(100% - 80px);
+    height: 50px;
+    overflow: hidden;
+}
+/*************************** Messaggi a destra *****************************/
+.inner-messages{
+    background-image: url(../img/mine.jpg);
+    background-size: cover;
+    height: calc(100% - 120px);
+    overflow-y: auto;
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+    padding-top: 1.5rem;
+}
+.text-message{
+    padding: 0.7rem 8rem 0.7rem 0.7rem;
+    border-radius: 10px;
+    margin-top: 0.8rem;
+}
+.sent{
+    background-color: #D5F9BA;
+    align-self: flex-end;
+    margin-right: 2rem;
+}
+.received{
+    background-color: white;
+    margin-left: 2rem;
+}
+.footer{
+    background-color: #F3EEEA;
     height: 60px;
 }
-

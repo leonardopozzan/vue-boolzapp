@@ -39,8 +39,43 @@
                     <button><i class="fa-sharp fa-solid fa-magnifying-glass"></i></button>
                     <input type="text" placeholder="Cerca o inizia una nuova chat" class="flex-grow-1">
                 </div>
+                <div class="list-chat">
+                    <div v-for="(contact, i) in contacts" :key="i" class="chat" @click="showChat(contact)">
+                        <div class="pic-profile">
+                            <img :src="`img/avatar${contacts[i].avatar}.jpg`">
+                        </div>
+                        <div class="ms-2 name-chat">
+                            <span><b>{{contacts[i].name}}</b></span><br>
+                            <span>{{contacts[i].messages[contacts[i].messages.length - 1].message}}</span>
+                        </div>
+                        <div class="time">{{contacts[i].messages[contacts[i].messages.length - 1].date.substring(11,16)}}</div>
+                    </div>
+                </div>
             </div>
-            <div class="messagges col-md-6 col-lg-8">
+            <div class="messages col-md-6 col-lg-8">
+                <div class="header my-flex ps-2">
+                    <div class="my-flex">
+                        <div class="my-pic-profile"><img :src="`img/avatar${contacts[activeChat].avatar}.jpg`"></div>
+                        <div class="ms-2">
+                            <span><b>{{contacts[activeChat].name}}</b></span> <br>
+                            <span>Ultimo accesso oggi alle {{contacts[activeChat].messages[contacts[activeChat].messages.length - 1].date.substring(11,16)}}</span>
+                        </div>
+                    </div>
+                    <div class="icons">
+                        <i class="fa-sharp fa-solid fa-magnifying-glass me-3 fs-5"></i>
+                        <i class="fa-solid fa-paperclip me-3 fs-5"></i>
+                        <i class="fa-solid fa-ellipsis-vertical me-3 fs-5"></i>
+                    </div>
+                </div>
+                <div class="inner-messages">
+                    <div v-for="(item, i) in contacts[activeChat].messages" :key="i" class="text-message" :class="item.status">{{item.message}}</div>
+                </div>
+                <div class="footer my-flex p-3">
+                    <i class="fa-regular fa-face-smile fs-4"></i>
+                    <input type="text" class="flex-grow-1 fs-5 mx-3 rounded-2 border-0" placeholder="Scrivi un messaggio">
+                    <i class="fa-solid fa-paper-plane fs-4 me-3"></i>
+                    <i class="fa-solid fa-microphone fs-4"></i>
+                </div>
             </div>
         </div>
     </div>
