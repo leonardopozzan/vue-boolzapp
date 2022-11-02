@@ -12,7 +12,7 @@ div{
     border: 1px solid black;
 }
 #app{
-    height: 90%;
+    height: 90vh;
     width: 80%;
 }
 img{
@@ -28,8 +28,9 @@ img{
 .menu-chat > *{
     padding: 5px   ;
 }
+/* immagine e tasti per profilo personale*/
 .header{
-    height: 50px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -39,15 +40,16 @@ img{
     color: #B1B1B1;
 }  
 .my-pic-profile{
-    height: 45px;
-    width: 45px;
+    height: 55px;
+    width: 55px;
     border-radius: 50%;
     overflow: hidden;
     background-color: white;
 }
+/*barra per impostare le notifiche*/
 .notify{
     background-color: #8EDAFC;
-    height: 60px;
+    height: 70px;
     display: flex;
     align-items: center;
 }
@@ -58,21 +60,17 @@ img{
     background-color: white;
     color: #8EDAFC;
 }
-.pic-profile{
-    height: 55px;
-    width: 55px;
-    border-radius: 50%;
-    overflow: hidden;
-}
+/* barra di ricerca*/
 .input-bar{
     background-color: #FAFAFA;
+    height: 40px;
 }
 .input-bar button{
     background-color: white;
     padding-left: 10px;
     padding-right: 10px;
     border: 0;
-    border-right: 2px solid #B1B1B1;
+    border-right: 1px solid #B1B1B1;
     color: #B1B1B1;
     border-radius: 5px 0 0 5px;
 }
@@ -80,7 +78,34 @@ img{
     border: 0;
     border-radius: 0 5px 5px 0;
 }
-.chat{
-    height: 60px;
+/* chat dinamiche */
+.list-chat{
+    
+    padding: 0;
+    overflow-y: auto;
+    height: calc(100% - 170px);
 }
-
+.chat{
+    padding: 5px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    position: relative;
+}
+.pic-profile{
+    height: 65px;
+    width: 65px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: #F2F2F2;
+}
+.time{
+    position: absolute;
+    top:5px; right: 5px;
+}
+.name-chat{
+    width: calc(100% - 80px);
+    height: 50px;
+    overflow: hidden;
+}
