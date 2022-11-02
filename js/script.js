@@ -178,8 +178,8 @@ const app = createApp({
         }
     },
     methods:{
-        showChat(item){
-            const index = this.contacts.findIndex((element)=> element.id == item.id);
+        showChat(id){
+            const index = this.contacts.findIndex((element)=> element.id == id);
             this.activeChat = index;
         }
     }

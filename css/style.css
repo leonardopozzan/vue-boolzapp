@@ -60,6 +60,8 @@ img{
     font-size: 14px;
 }
 .notify .pic-profile{
+    width: 55px;
+    height: 55px;
     background-color: white;
     color: #8EDAFC;
 }
@@ -83,7 +85,6 @@ img{
 }
 /* chat dinamiche */
 .list-chat{
-    
     padding: 0;
     overflow-y: auto;
     height: calc(100% - 170px);
@@ -96,6 +97,13 @@ img{
     background-color: white;
     position: relative;
     border-bottom: 1px solid #B1B1B1;
+    cursor: pointer;
+}
+.chat:hover{
+    background-color: #E9EBEB;
+}
+.chat-active{
+    background-color: #E9EBEB;
 }
 .pic-profile{
     height: 65px;
@@ -128,6 +136,7 @@ img{
     padding: 0.7rem 8rem 0.7rem 0.7rem;
     border-radius: 10px;
     margin-top: 0.8rem;
+    max-width: 50%;
 }
 .sent{
     background-color: #D5F9BA;
