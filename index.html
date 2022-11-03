@@ -37,18 +37,18 @@
                 </div>
                 <div class="my-flex input-bar">
                     <button><i class="fa-sharp fa-solid fa-magnifying-glass"></i></button>
-                    <input type="text" placeholder="Cerca o inizia una nuova chat" class="flex-grow-1">
+                    <input type="text" v-model="searchTerm" placeholder="Cerca o inizia una nuova chat" class="flex-grow-1">
                 </div>
                 <div class="list-chat">
-                    <div v-for="(contact, i) in contacts" :key="i" class="chat" @click="showChat(contact.id)" :class="(contact.id == contacts[activeChat].id) ? 'chat-active' : ''">
+                    <div v-for="(contact, i) in filteredContacts" :key="i" class="chat" @click="showChat(contact.id)" :class="(contact.id == contacts[activeChat].id) ? 'chat-active' : ''">
                         <div class="pic-profile">
-                            <img :src="`img/avatar${contacts[i].avatar}.jpg`">
+                            <img :src="`img/avatar${contact.avatar}.jpg`">
                         </div>
                         <div class="ms-2 name-chat">
-                            <span><b>{{contacts[i].name}}</b></span><br>
-                            <span>{{contacts[i].messages[contacts[i].messages.length - 1].message}}</span>
+                            <span><b>{{contact.name}}</b></span><br>
+                            <span>{{getLastMessageReceived(contact).message}}</span>
                         </div>
-                        <div class="time-chat">{{contacts[i].messages[contacts[i].messages.length - 1].date.substring(11,16)}}</div>
+                        <div class="time-chat">{{getLastMessageReceived(contact).date.substring(11,16)}}</div>
                     </div>
                 </div>
             </div>
@@ -58,7 +58,7 @@
                         <div class="my-pic-profile"><img :src="`img/avatar${contacts[activeChat].avatar}.jpg`"></div>
                         <div class="ms-2">
                             <span><b>{{contacts[activeChat].name}}</b></span> <br>
-                            <span>Ultimo accesso oggi alle {{contacts[activeChat].messages[contacts[activeChat].messages.length - 1].date.substring(11,16)}}</span>
+                            <span>Ultimo accesso oggi alle {{getLastMessageReceived(contacts[activeChat]).date.substring(11,16)}}</span>
                         </div>
                     </div>
                     <div class="icons">

@@ -175,6 +175,11 @@ img{
     position: absolute;
     top: 0; right: 5px;
     color: var(--grey-600);
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+.text-message:hover button{
+    opacity: 1;
 }
 .footer{
     background-color: var(--grey-400);

@@ -4,6 +4,7 @@ const app = createApp({
     data(){
         return{
             activeChat: 0,
+            searchTerm: '',
             randomAnswer : ["sono d'accordo", "non ho voglia oggi", "ho tempo solo nel weekend", "domani sera ho un compleanno",
                             "domenica sera sarebbe perfetto", "ho preso ferie, possiamo andare a Parigi", "mi raccomando non dire nulla a mia moglie"],
             contacts: [
@@ -187,6 +188,11 @@ const app = createApp({
             ]
         }
     },
+    computed:{
+        filteredContacts(){
+            return this.contacts.filter((element) => element.name.toLowerCase().includes(this.searchTerm.toLowerCase()))
+        }
+    },
     methods:{
         showChat(id){
             const index = this.contacts.findIndex((element)=> element.id == id);
@@ -195,7 +201,7 @@ const app = createApp({
         sendMessage(){
             const newMessage = this.contacts[this.activeChat].newMessage;
             const date = new Date();
-            const formattedDate = `${date.getDate() < 10 ? '0'+date.getDate() : date.getDate()}/${date.getMonth() < 10 ? '0'+date.getMonth() : date.getMonth()}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+            const formattedDate = this.getFormattedDate(date);
             if(!!newMessage.length){
                 const newObjMessage = {
                     date: formattedDate,
@@ -212,13 +218,20 @@ const app = createApp({
             const randomNumber = Math.floor(Math.random() * this.randomAnswer.length);
             const newMessage = this.randomAnswer[randomNumber];
             const date = new Date();
-            const formattedDate = `${date.getDate() < 10 ? '0'+date.getDate() : date.getDate()}/${date.getMonth() < 10 ? '0'+date.getMonth() : date.getMonth()}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+            const formattedDate = this.getFormattedDate(date);
             const newObjMessage = {
                 date: formattedDate,
                 message: newMessage,
                 status: 'received'
                 };
             this.contacts[this.activeChat].messages.push(newObjMessage);
+        },
+        getLastMessageReceived(item){
+            const messagesReceived = item.messages.filter((element)=> element.status === 'received');
+            return messagesReceived[messagesReceived.length -1];
+        },
+        getFormattedDate(date){
+            return `${date.getDate() < 10 ? '0'+date.getDate() : date.getDate()}/${date.getMonth() < 10 ? '0'+date.getMonth() : date.getMonth()}/${date.getFullYear()} ${date.getHours() < 10 ? '0'+date.getHours() : date.getHours()}:${date.getMinutes() < 10 ? '0'+date.getMinutes() : date.getMinutes()}:${date.getSeconds() < 10 ? '0'+date.getSeconds() : date.getSeconds()}`;
         }
     }
 })
