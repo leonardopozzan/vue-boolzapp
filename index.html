@@ -81,8 +81,8 @@
                 <div class="footer my-flex p-3">
                     <button><i class="fa-regular fa-face-smile fs-4"></i></button>
                     <input v-model="contacts[activeChat].newMessage" @keyup.enter="sendMessage()" type="text" class="flex-grow-1 fs-5 mx-1 rounded-2 border-0" placeholder="Scrivi un messaggio">
-                    <button @click="sendMessage()"><i class="fa-solid fa-paper-plane fs-4"></i></button>
-                    <button><i class="fa-solid fa-microphone fs-4"></i></button>
+                    <button @click="sendMessage()" v-if="!!contacts[activeChat].newMessage"><i class="fa-solid fa-paper-plane fs-4"></i></button>
+                    <button v-else><i class="fa-solid fa-microphone fs-4"></i></button>
                 </div>
             </div>
         </div>
