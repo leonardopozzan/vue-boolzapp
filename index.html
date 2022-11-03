@@ -68,7 +68,7 @@
                     </div>
                 </div>
                 <div class="inner-messages">
-                    <div v-for="(item, i) in filteredMessagges" :key="i" class="text-message" :class="item.status">
+                    <div v-for="(item, i) in contacts[activeChat].messages" v-show="item.show" :key="i" class="text-message" :class="item.status">
                         <span>{{item.message}}</span>
                         <span class="time-message">{{item.date.substring(11,16)}}</span>
                         <button @click="toggleClass(i)"><i class="fa-solid fa-angle-down"></i></button>
