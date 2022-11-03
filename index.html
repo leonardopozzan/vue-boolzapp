@@ -21,9 +21,9 @@
                         <span><b>Sofia</b></span>
                     </div>
                     <div class="icons">
-                        <i class="fa-solid fa-circle-notch me-3 fs-5"></i>
-                        <i class="fa-solid fa-message me-3 fs-5"></i>
-                        <i class="fa-solid fa-ellipsis-vertical me-3 fs-5"></i>
+                        <button><i class="fa-solid fa-circle-notch"></i></button>
+                        <button><i class="fa-solid fa-message"></i></button>
+                        <button><i class="fa-solid fa-ellipsis-vertical"></i></button>
                     </div>
                 </div>
                 <div class="notify">
@@ -32,7 +32,7 @@
                     </div>
                     <div class="ms-2">
                         <span><b>Ricevi notifiche di nuovi messaggi</b></span> <br>
-                        <span><u>Attiva notifiche desktop</u></span>
+                        <a href="#" class="text-dark"><span>Attiva notifiche desktop</span></a>
                     </div>
                 </div>
                 <div class="my-flex input-bar">
@@ -48,7 +48,7 @@
                             <span><b>{{contacts[i].name}}</b></span><br>
                             <span>{{contacts[i].messages[contacts[i].messages.length - 1].message}}</span>
                         </div>
-                        <div class="time">{{contacts[i].messages[contacts[i].messages.length - 1].date.substring(11,16)}}</div>
+                        <div class="time-chat">{{contacts[i].messages[contacts[i].messages.length - 1].date.substring(11,16)}}</div>
                     </div>
                 </div>
             </div>
@@ -62,19 +62,23 @@
                         </div>
                     </div>
                     <div class="icons">
-                        <i class="fa-sharp fa-solid fa-magnifying-glass me-3 fs-5"></i>
-                        <i class="fa-solid fa-paperclip me-3 fs-5"></i>
-                        <i class="fa-solid fa-ellipsis-vertical me-3 fs-5"></i>
+                        <button><i class="fa-sharp fa-solid fa-magnifying-glass"></i></button>
+                        <button><i class="fa-solid fa-paperclip"></i></button>
+                        <button><i class="fa-solid fa-ellipsis-vertical"></i></button>
                     </div>
                 </div>
                 <div class="inner-messages">
-                    <div v-for="(item, i) in contacts[activeChat].messages" :key="i" class="text-message" :class="item.status">{{item.message}}</div>
+                    <div v-for="(item, i) in contacts[activeChat].messages" :key="i" class="text-message" :class="item.status">
+                        <span>{{item.message}}</span>
+                        <span class="time-message">{{item.date.substring(11,16)}}</span>
+                        <button><i class="fa-solid fa-angle-down"></i></button>
+                    </div>
                 </div>
                 <div class="footer my-flex p-3">
-                    <i class="fa-regular fa-face-smile fs-4"></i>
-                    <input type="text" class="flex-grow-1 fs-5 mx-3 rounded-2 border-0" placeholder="Scrivi un messaggio">
-                    <i class="fa-solid fa-paper-plane fs-4 me-3"></i>
-                    <i class="fa-solid fa-microphone fs-4"></i>
+                    <button><i class="fa-regular fa-face-smile fs-4"></i></button>
+                    <input v-model="contacts[activeChat].newMessage" @keyup.enter="sendMessage()" type="text" class="flex-grow-1 fs-5 mx-1 rounded-2 border-0" placeholder="Scrivi un messaggio">
+                    <button @click="sendMessage()"><i class="fa-solid fa-paper-plane fs-4"></i></button>
+                    <button><i class="fa-solid fa-microphone fs-4"></i></button>
                 </div>
             </div>
         </div>

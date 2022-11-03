@@ -4,6 +4,16 @@
     margin: 0;
     box-sizing: border-box;
 }
+:root{
+    --grey-100: #F2F2F2;
+    --grey-200: #EAEAEA;
+    --grey-300: #E9EBEB;
+    --grey-400: #F3EEEA;
+    --grey-500: #B1B1B1; 
+    --grey-600: #6E7C85;
+    --light-blue: #8EDAFC;
+    --light-green: #D5F9BA;
+}
 .wrapper{
     height: 100vh;
     background: linear-gradient(180deg, rgb(21, 124, 119) 100px, rgb(200, 200, 200) 0);
@@ -26,7 +36,8 @@ img{
 
 /*************************** lista chat a sinistra *****************************/
 .menu-chat{
-    border-right: 1px solid #B1B1B1;
+    border-right: 1px solid var(--grey-500);
+    background-color: white;
 }
 .menu-chat > *{
     padding: 5px   ;
@@ -37,10 +48,15 @@ img{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #EAEAEA;
+    background-color: var(--grey-200);
 }
-.icons{
-    color: #B1B1B1;
+.icons button, .footer button{
+    color: var(--grey-500);
+    border: 0;
+    background-color: transparent;
+    font-size: 1.25rem;
+    padding: 0.6rem;
+    margin-right: 0.4rem;
 }  
 .my-pic-profile{
     height: 55px;
@@ -51,7 +67,7 @@ img{
 }
 /*barra per impostare le notifiche*/
 .notify{
-    background-color: #8EDAFC;
+    background-color: var(--light-blue);
     height: 70px;
     display: flex;
     align-items: center;
@@ -63,11 +79,11 @@ img{
     width: 55px;
     height: 55px;
     background-color: white;
-    color: #8EDAFC;
+    color: var(--light-blue);
 }
 /* barra di ricerca*/
 .input-bar{
-    background-color: #EAEAEA;
+    background-color: var(--grey-200);
     height: 40px;
 }
 .input-bar button{
@@ -75,8 +91,8 @@ img{
     padding-left: 10px;
     padding-right: 10px;
     border: 0;
-    border-right: 1px solid #B1B1B1;
-    color: #B1B1B1;
+    border-right: 1px solid var(--grey-500);
+    color: var(--grey-500);
     border-radius: 5px 0 0 5px;
 }
 .input-bar input{
@@ -94,25 +110,24 @@ img{
     height: 70px;
     display: flex;
     align-items: center;
-    background-color: white;
     position: relative;
-    border-bottom: 1px solid #B1B1B1;
+    border-bottom: 1px solid var(--grey-500);
     cursor: pointer;
 }
 .chat:hover{
-    background-color: #E9EBEB;
+    background-color: var(--grey-300);
 }
 .chat-active{
-    background-color: #E9EBEB;
+    background-color: var(--grey-300);
 }
 .pic-profile{
     height: 65px;
     width: 65px;
     border-radius: 50%;
     overflow: hidden;
-    background-color: #F2F2F2;
+    background-color: var(--grey-100);
 }
-.time{
+.time-chat{
     position: absolute;
     top:5px; right: 5px;
 }
@@ -131,15 +146,17 @@ img{
     flex-flow: column;
     align-items: flex-start;
     padding-top: 1.5rem;
+
 }
 .text-message{
     padding: 0.7rem 8rem 0.7rem 0.7rem;
     border-radius: 10px;
     margin-top: 0.8rem;
     max-width: 50%;
+    position: relative; 
 }
 .sent{
-    background-color: #D5F9BA;
+    background-color: var(--light-green);
     align-self: flex-end;
     margin-right: 2rem;
 }
@@ -147,7 +164,22 @@ img{
     background-color: white;
     margin-left: 2rem;
 }
+.time-message{
+    position: absolute;
+    bottom: 5px; right: 5px;
+    font-size: 11px;
+}
+.text-message button{
+    border: 0;
+    background-color: transparent;
+    position: absolute;
+    top: 0; right: 5px;
+    color: var(--grey-600);
+}
 .footer{
-    background-color: #F3EEEA;
+    background-color: var(--grey-400);
     height: 60px;
+}
+.footer button{
+    color: var(--grey-600);
 }

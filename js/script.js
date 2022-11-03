@@ -4,12 +4,14 @@ const app = createApp({
     data(){
         return{
             activeChat: 0,
+            randomAnswer : [""],
             contacts: [
                 {
                     id:id++,
                     name: 'Michele',
                     avatar: '_1',
                     visible: true,
+                    newMessage: '',
                     messages: [
                         {
                         date: '10/01/2020 15:30:55',
@@ -33,6 +35,7 @@ const app = createApp({
                     name: 'Fabio',
                     avatar: '_2',
                     visible: true,
+                    newMessage: '',
                     messages: [
                         {
                         date: '20/03/2020 16:30:00',
@@ -56,6 +59,7 @@ const app = createApp({
                     name: 'Samuele',
                     avatar: '_3',
                     visible: true,
+                    newMessage: '',
                     messages: [
                         {
                         date: '28/03/2020 10:10:40',
@@ -79,6 +83,7 @@ const app = createApp({
                     name: 'Alessandro B.',
                     avatar: '_4',
                     visible: true,
+                    newMessage: '',
                     messages: [
                         {
                         date: '10/01/2020 15:30:55',
@@ -97,6 +102,7 @@ const app = createApp({
                     name: 'Alessandro L.',
                     avatar: '_5',
                     visible: true,
+                    newMessage: '',
                     messages: [
                         {
                         date: '10/01/2020 15:30:55',
@@ -115,6 +121,7 @@ const app = createApp({
                     name: 'Claudia',
                     avatar: '_6',
                     visible: true,
+                    newMessage: '',
                     messages: [
                         {
                         date: '10/01/2020 15:30:55',
@@ -138,6 +145,7 @@ const app = createApp({
                     name: 'Federico',
                     avatar: '_7',
                     visible: true,
+                    newMessage: '',
                     messages: [
                         {
                         date: '10/01/2020 15:30:55',
@@ -156,6 +164,7 @@ const app = createApp({
                     name: 'Davide',
                     avatar: '_8',
                     visible: true,
+                    newMessage: '',
                     messages: [
                         {
                         date: '10/01/2020 15:30:55',
@@ -181,6 +190,22 @@ const app = createApp({
         showChat(id){
             const index = this.contacts.findIndex((element)=> element.id == id);
             this.activeChat = index;
+        },
+        sendMessage(){
+            const newMessage = this.contacts[this.activeChat].newMessage;
+            const date = new Date();
+            const formattedDate = `${date.getDate() < 10 ? '0'+date.getDate() : date.getDate()}/${date.getMonth() < 10 ? '0'+date.getMonth() : date.getMonth()}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+            if(!!newMessage.length){
+                const newObjMessage = {
+                    date: formattedDate,
+                    message: newMessage,
+                    status: 'sent'
+                    };
+                this.contacts[this.activeChat].messages.push(newObjMessage);
+            }
+            // console.log(formattedDate);
+            this.contacts[this.activeChat].newMessage = '';
+            
         }
     }
 })
