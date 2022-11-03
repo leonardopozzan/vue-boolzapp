@@ -5,6 +5,7 @@ const app = createApp({
         return{
             activeChat: 0,
             searchTerm: '',
+            pcStatus: '',
             randomAnswer : ["sono d'accordo", "non ho voglia oggi", "ho tempo solo nel weekend", "domani sera ho un compleanno",
                             "domenica sera sarebbe perfetto", "ho preso ferie, possiamo andare a Parigi", "mi raccomando non dire nulla a mia moglie"],
             contacts: [
@@ -240,6 +241,8 @@ const app = createApp({
             this.activeChat = index;
         },
         sendMessage(){
+            this.contacts[this.activeChat].visible = false;
+            this.pcStatus = 'sta scrivendo...';
             const newMessage = this.contacts[this.activeChat].newMessage;
             const date = new Date();
             const formattedDate = this.getFormattedDate(date);
@@ -270,8 +273,22 @@ const app = createApp({
                 show: true
                 };
             this.contacts[this.activeChat].messages.push(newObjMessage);
+            this.pcStatus = 'Online';
+            setTimeout(()=> this.contacts[this.activeChat].visible = true,2000)
         },
         getLastMessageReceived(item){
+            const messagesReceived = item.messages.filter((element)=> element.status === 'received' && element.show);
+            if(messagesReceived.length == 0){
+                return {
+                    date: '10/01/2020 00:00:00',
+                    message: '',
+                    status: 'received',
+                    options: false
+                    }
+            }
+            return messagesReceived[messagesReceived.length -1];
+        },
+        getLastAccess(item){
             const messagesReceived = item.messages.filter((element)=> element.status === 'received');
             if(messagesReceived.length == 0){
                 return {

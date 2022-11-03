@@ -48,7 +48,7 @@
                             <span><b>{{contact.name}}</b></span><br>
                             <span>{{getLastMessageReceived(contact).message}}</span>
                         </div>
-                        <div class="time-chat">{{getLastMessageReceived(contact).date.substring(11,16)}}</div>
+                        <div class="time-chat">{{getLastAccess(contact).date.substring(11,16)}}</div>
                     </div>
                 </div>
             </div>
@@ -58,7 +58,8 @@
                         <div class="my-pic-profile"><img :src="`img/avatar${contacts[activeChat].avatar}.jpg`"></div>
                         <div class="ms-2">
                             <span><b>{{contacts[activeChat].name}}</b></span> <br>
-                            <span>Ultimo accesso oggi alle {{getLastMessageReceived(contacts[activeChat]).date.substring(11,16)}}</span>
+                            <span v-if="contacts[activeChat].visible">Ultimo accesso oggi alle {{getLastAccess(contacts[activeChat]).date.substring(11,16)}}</span>
+                            <span v-else :class="{'boing' : pcStatus == 'sta scrivendo...'}">{{pcStatus}}</span>
                         </div>
                     </div>
                     <div class="icons">
