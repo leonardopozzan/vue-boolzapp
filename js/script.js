@@ -4,7 +4,8 @@ const app = createApp({
     data(){
         return{
             activeChat: 0,
-            randomAnswer : [""],
+            randomAnswer : ["sono d'accordo", "non ho voglia oggi", "ho tempo solo nel weekend", "domani sera ho un compleanno",
+                            "domenica sera sarebbe perfetto", "ho preso ferie, possiamo andare a Parigi", "mi raccomando non dire nulla a mia moglie"],
             contacts: [
                 {
                     id:id++,
@@ -205,7 +206,19 @@ const app = createApp({
             }
             // console.log(formattedDate);
             this.contacts[this.activeChat].newMessage = '';
-            
+            setTimeout(this.sendAnswer,1000)
+        },
+        sendAnswer(){
+            const randomNumber = Math.floor(Math.random() * this.randomAnswer.length);
+            const newMessage = this.randomAnswer[randomNumber];
+            const date = new Date();
+            const formattedDate = `${date.getDate() < 10 ? '0'+date.getDate() : date.getDate()}/${date.getMonth() < 10 ? '0'+date.getMonth() : date.getMonth()}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+            const newObjMessage = {
+                date: formattedDate,
+                message: newMessage,
+                status: 'received'
+                };
+            this.contacts[this.activeChat].messages.push(newObjMessage);
         }
     }
 })
