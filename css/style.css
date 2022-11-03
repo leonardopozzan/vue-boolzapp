@@ -169,7 +169,7 @@ img{
     bottom: 5px; right: 5px;
     font-size: 11px;
 }
-.text-message button{
+.text-message > button{
     border: 0;
     background-color: transparent;
     position: absolute;
@@ -180,6 +180,18 @@ img{
 }
 .text-message:hover button{
     opacity: 1;
+}
+.options{
+    position: absolute;
+    top: 20px; right: 5px;
+    width: 70px;
+    z-index: 100;
+}
+.options button{
+    width: 100%;
+    padding: 5px;
+    border: 1px solid black;
+    background-color: white;
 }
 .footer{
     background-color: var(--grey-400);

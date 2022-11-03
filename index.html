@@ -68,10 +68,14 @@
                     </div>
                 </div>
                 <div class="inner-messages">
-                    <div v-for="(item, i) in contacts[activeChat].messages" :key="i" class="text-message" :class="item.status">
+                    <div v-for="(item, i) in filteredMessagges" :key="i" class="text-message" :class="item.status">
                         <span>{{item.message}}</span>
                         <span class="time-message">{{item.date.substring(11,16)}}</span>
-                        <button><i class="fa-solid fa-angle-down"></i></button>
+                        <button @click="toggleClass(i)"><i class="fa-solid fa-angle-down"></i></button>
+                        <div class="options" :class="{'d-none': !item.options}" @mouseleave="toggleClass(i)">
+                            <button>Info</button> <br>
+                            <button @click="deleteMessage(i)">Cancella</button>
+                        </div>
                     </div>
                 </div>
                 <div class="footer my-flex p-3">
