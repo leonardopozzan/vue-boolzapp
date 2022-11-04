@@ -13,6 +13,7 @@
     --grey-600: #6E7C85;
     --light-blue: #8EDAFC;
     --light-green: #D5F9BA;
+    --white: white;
 }
 .wrapper{
     height: 100vh;
@@ -37,7 +38,7 @@ img{
 /*************************** lista chat a sinistra *****************************/
 .menu-chat{
     border-right: 1px solid var(--grey-500);
-    background-color: white;
+    background-color: var(--white);
 }
 .menu-chat > *{
     padding: 5px   ;
@@ -59,11 +60,11 @@ img{
     margin-right: 0.4rem;
 }  
 .my-pic-profile{
-    height: 55px;
-    width: 55px;
+    height: 50px;
+    width: 50px;
     border-radius: 50%;
     overflow: hidden;
-    background-color: white;
+    background-color: var(--white);
 }
 /*barra per impostare le notifiche*/
 .notify{
@@ -76,18 +77,19 @@ img{
     font-size: 14px;
 }
 .notify .pic-profile{
-    width: 55px;
-    height: 55px;
-    background-color: white;
+    width: 45px;
+    height: 45px;
+    background-color: var(--white);
     color: var(--light-blue);
 }
 /* barra di ricerca*/
 .input-bar{
     background-color: var(--grey-200);
     height: 40px;
+    border-bottom: 1px solid var(--grey-500);
 }
 .input-bar button{
-    background-color: white;
+    background-color: var(--white);
     padding-left: 10px;
     padding-right: 10px;
     border: 0;
@@ -121,8 +123,8 @@ img{
     background-color: var(--grey-300);
 }
 .pic-profile{
-    height: 65px;
-    width: 65px;
+    height: 55px;
+    width: 55px;
     border-radius: 50%;
     overflow: hidden;
     background-color: var(--grey-100);
@@ -161,7 +163,7 @@ img{
     margin-right: 2rem;
 }
 .received{
-    background-color: white;
+    background-color: var(--white);
     margin-left: 2rem;
 }
 .time-message{
@@ -191,7 +193,7 @@ img{
     width: 100%;
     padding: 5px;
     border: 1px solid black;
-    background-color: white;
+    background-color: var(--white);
 }
 .footer{
     background-color: var(--grey-400);
@@ -205,3 +207,16 @@ img{
     color: var(--grey-600);
 }
 /*************************** Animazioni *****************************/
+.boing .ball{
+    display: inline-block;
+    width: 5px; height: 5px;
+    background-color: black;
+    border-radius: 50%;
+    margin: 0 3px;
+    animation: bounce-1 0.7s linear calc(0.1s * var(--item)) infinite;
+}
+@keyframes bounce-1 {
+    0%   { transform: translateY(0); }
+    50%  { transform: translateY(-6px); }
+    100% { transform: translateY(0); }
+}

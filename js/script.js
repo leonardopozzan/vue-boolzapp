@@ -242,7 +242,7 @@ const app = createApp({
         },
         sendMessage(){
             this.contacts[this.activeChat].visible = false;
-            this.pcStatus = 'sta scrivendo...';
+            this.pcStatus = 'sta scrivendo';
             const newMessage = this.contacts[this.activeChat].newMessage;
             const date = new Date();
             const formattedDate = this.getFormattedDate(date);
@@ -258,7 +258,7 @@ const app = createApp({
             }
             // console.log(formattedDate);
             this.contacts[this.activeChat].newMessage = '';
-            setTimeout(this.sendAnswer,1000)
+            setTimeout(this.sendAnswer,2500)
         },
         sendAnswer(){
             const randomNumber = Math.floor(Math.random() * this.randomAnswer.length);
