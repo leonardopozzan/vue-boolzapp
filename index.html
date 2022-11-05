@@ -13,8 +13,11 @@
 </head>
 <body>
     <div class="wrapper my-flex">
+        <!-- container generale di tutta l'app -->
         <div id="app" class="d-flex">
+            <!-- menu di sinistra con la lista delle chat -->
             <div class="menu-chat col-md-6 col-lg-4">
+                <!-- foto e opzione dell'account personale -->
                 <div class="header">
                     <div class="my-flex">   
                         <div class="my-pic-profile"><img src="img/avatar_io.jpg"></div>
@@ -26,6 +29,7 @@
                         <button><i class="fa-solid fa-ellipsis-vertical"></i></button>
                     </div>
                 </div>
+                <!-- sezione per l'attivazione delle notifiche -->
                 <div class="notify">
                     <div class="pic-profile my-flex">
                         <i class="fa-solid fa-bell-slash fs-4"></i>
@@ -35,15 +39,18 @@
                         <a href="#" class="text-dark"><span>Attiva notifiche desktop</span></a>
                     </div>
                 </div>
+                <!-- barra di ricerca per filtrare la lista delle chat -->
                 <div class="my-flex input-bar">
                     <button><i class="fa-sharp fa-solid fa-magnifying-glass"></i></button>
                     <input type="text" v-model="searchTerm" placeholder="Cerca o inizia una nuova chat" class="flex-grow-1">
                 </div>
+                <!-- lista delle chat creato scorrendo la copia dell'array originale filtrato attraverso il campo di input qui sopra-->
                 <div class="list-chat">
                     <div v-for="(contact, i) in filteredContacts" :key="i" class="chat" @click="showChat(contact.id)" :class="{ 'chat-active' : contact.id == contacts[activeChat].id}">
                         <div class="pic-profile">
                             <img :src="`img/avatar${contact.avatar}.jpg`">
                         </div>
+                        <!-- informazioni di ultimo accesso e messaggio ottenute grazie a due specifiche funzioni -->
                         <div class="ms-2 name-chat">
                             <span><b>{{contact.name}}</b></span><br>
                             <span>{{getLastMessageReceived(contact).message}}</span>
@@ -52,7 +59,9 @@
                     </div>
                 </div>
             </div>
+            <!-- sezione della chat selezionata -->
             <div class="messages col-md-6 col-lg-8">
+                <!-- foto profilo, ultimo accesso e opzioni della chat -->
                 <div class="header my-flex ps-2">
                     <div class="my-flex">
                         <div class="my-pic-profile"><img :src="`img/avatar${contacts[activeChat].avatar}.jpg`"></div>
@@ -73,17 +82,19 @@
                         <button><i class="fa-solid fa-ellipsis-vertical"></i></button>
                     </div>
                 </div>
+                <!-- lista dei messsaggi creata scorrendo l'array dei messaggi, con la funzione di cancella messaggio-->
                 <div class="inner-messages">
                     <div v-for="(item, i) in contacts[activeChat].messages" v-show="item.show" :key="i" class="text-message" :class="item.status">
                         <span>{{item.message}}</span>
                         <span class="time-message">{{item.date.substring(11,16)}}</span>
                         <button @click="toggleClass(i)"><i class="fa-solid fa-angle-down"></i></button>
-                        <div class="options" :class="{'d-none': !item.options}" @mouseleave="toggleClass(i)">
+                        <div class="options-message" :class="{'d-none': !item.options}" @mouseleave="toggleClass(i)">
                             <button>Info</button> <br>
                             <button @click="deleteMessage(i)">Cancella</button>
                         </div>
                     </div>
                 </div>
+                <!-- sezione dell'invio dei messaggi -->
                 <div class="footer my-flex p-3">
                     <button><i class="fa-regular fa-face-smile fs-4"></i></button>
                     <input v-model="contacts[activeChat].newMessage" @keyup.enter="sendMessage()" type="text" class="flex-grow-1 fs-5 mx-1 rounded-2 border-0" placeholder="Scrivi un messaggio">

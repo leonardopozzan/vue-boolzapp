@@ -231,21 +231,26 @@ const app = createApp({
         }
     },
     computed:{
+        // funzione che filtra i contatti
         filteredContacts(){
             return this.contacts.filter((element) => element.name.toLowerCase().includes(this.searchTerm.toLowerCase()))
         }
     },
     methods:{
+        // funzione che imposta l'indice della chat da visualizare in base agli id
         showChat(id){
             const index = this.contacts.findIndex((element)=> element.id == id);
             this.activeChat = index;
         },
+        // funzione per l'invio dei messaggi
         sendMessage(){
+            // cambio il valore di visible che è colegato al testo di ultimo accesso 
             this.contacts[this.activeChat].visible = false;
             this.pcStatus = 'sta scrivendo';
             const newMessage = this.contacts[this.activeChat].newMessage;
             const date = new Date();
             const formattedDate = this.getFormattedDate(date);
+            // costruisco e aggiungo il nuovo messaggio all'array dei messaggi
             if(!!newMessage.length){
                 const newObjMessage = {
                     date: formattedDate,
@@ -256,15 +261,18 @@ const app = createApp({
                     };
                 this.contacts[this.activeChat].messages.push(newObjMessage);
             }
-            // console.log(formattedDate);
             this.contacts[this.activeChat].newMessage = '';
+            // chiamo l'invio della risposta dopo 2 secondi circa
             setTimeout(this.sendAnswer,2500)
         },
+        // funzione che risponde ai messaggi
         sendAnswer(){
+            // con un numero random scelgo una tra le risposte possibili
             const randomNumber = Math.floor(Math.random() * this.randomAnswer.length);
             const newMessage = this.randomAnswer[randomNumber];
             const date = new Date();
             const formattedDate = this.getFormattedDate(date);
+            // costruisco e aggiungo il nuovo messaggio all'array dei messaggi
             const newObjMessage = {
                 date: formattedDate,
                 message: newMessage,
@@ -273,11 +281,14 @@ const app = createApp({
                 show: true
                 };
             this.contacts[this.activeChat].messages.push(newObjMessage);
+            // cambio lo status della chat in Online e dopo un paio di secondi ripsristino l'ultimo accesso
             this.pcStatus = 'Online';
             setTimeout(()=> this.contacts[this.activeChat].visible = true,2000)
         },
+        // funzione che resitituisce l'oggetto contenente l'ultimo messaggio filtrando l'array dei messaggi tra quelli ricevuti e quelli non cancellati
         getLastMessageReceived(item){
             const messagesReceived = item.messages.filter((element)=> element.status === 'received' && element.show);
+            // oggetto di default in caso in cui l'array filtrato risulti vuoto
             if(messagesReceived.length == 0){
                 return {
                     date: '10/01/2020 00:00:00',
@@ -288,8 +299,10 @@ const app = createApp({
             }
             return messagesReceived[messagesReceived.length -1];
         },
+        // funzione che resitituisce l'oggetto contenente l'ultimo accesso filtrando l'array dei messaggi tra quelli ricevuti
         getLastAccess(item){
             const messagesReceived = item.messages.filter((element)=> element.status === 'received');
+            // oggetto di default in caso in cui l'array filtrato risulti vuoto
             if(messagesReceived.length == 0){
                 return {
                     date: '10/01/2020 00:00:00',
@@ -300,12 +313,15 @@ const app = createApp({
             }
             return messagesReceived[messagesReceived.length -1];
         },
+        // funzione che formatta la data
         getFormattedDate(date){
             return `${date.getDate() < 10 ? '0'+date.getDate() : date.getDate()}/${date.getMonth() < 10 ? '0'+date.getMonth() : date.getMonth()}/${date.getFullYear()} ${date.getHours() < 10 ? '0'+date.getHours() : date.getHours()}:${date.getMinutes() < 10 ? '0'+date.getMinutes() : date.getMinutes()}:${date.getSeconds() < 10 ? '0'+date.getSeconds() : date.getSeconds()}`;
         },
+        // funzione per farm apparire e scomparire le opzioni del singolo messaggio 
         toggleClass(i){
             this.contacts[this.activeChat].messages[i].options = !this.contacts[this.activeChat].messages[i].options;
         },
+        // funzione per nascondere i messaggi
         deleteMessage(i){
             this.contacts[this.activeChat].messages[i].show = false;
             this.contacts[this.activeChat].messages[i].message = '';
