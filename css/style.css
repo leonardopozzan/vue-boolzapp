@@ -51,7 +51,7 @@ img{
     justify-content: space-between;
     background-color: var(--grey-200);
 }
-.icons button, .footer button{
+.icons > button, .footer > button{
     color: var(--grey-500);
     border: 0;
     background-color: transparent;
@@ -139,6 +139,19 @@ img{
     overflow: hidden;
 }
 /*************************** Messaggi a destra *****************************/
+.options-chat{
+    position: absolute;
+    right: 5px; top: 45px;
+    z-index: 50;
+    width: 110px;
+}
+.options-chat button{
+    width: 100%;
+    border: 1px solid black;
+    background-color: var(--white);
+    padding: 5px;
+}
+
 /* interno della chat con i messaggi */
 .inner-messages{
     background-image: url(../img/mine.jpg);

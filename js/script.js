@@ -14,6 +14,7 @@ const app = createApp({
                     name: 'Michele',
                     avatar: '_1',
                     visible: true,
+                    options: false,
                     newMessage: '',
                     messages: [
                         {
@@ -44,6 +45,7 @@ const app = createApp({
                     name: 'Fabio',
                     avatar: '_2',
                     visible: true,
+                    options: false,
                     newMessage: '',
                     messages: [
                         {
@@ -74,6 +76,7 @@ const app = createApp({
                     name: 'Samuele',
                     avatar: '_3',
                     visible: true,
+                    options: false,
                     newMessage: '',
                     messages: [
                         {
@@ -103,6 +106,7 @@ const app = createApp({
                     name: 'Alessandro B.',
                     avatar: '_4',
                     visible: true,
+                    options: false,
                     newMessage: '',
                     messages: [
                         {
@@ -126,6 +130,7 @@ const app = createApp({
                     name: 'Alessandro L.',
                     avatar: '_5',
                     visible: true,
+                    options: false,
                     newMessage: '',
                     messages: [
                         {
@@ -149,6 +154,7 @@ const app = createApp({
                     name: 'Claudia',
                     avatar: '_6',
                     visible: true,
+                    options: false,
                     newMessage: '',
                     messages: [
                         {
@@ -179,6 +185,7 @@ const app = createApp({
                     name: 'Federico',
                     avatar: '_7',
                     visible: true,
+                    options: false,
                     newMessage: '',
                     messages: [
                         {
@@ -202,6 +209,7 @@ const app = createApp({
                     name: 'Davide',
                     avatar: '_8',
                     visible: true,
+                    options: false,
                     newMessage: '',
                     messages: [
                         {
@@ -317,9 +325,9 @@ const app = createApp({
         getFormattedDate(date){
             return `${date.getDate() < 10 ? '0'+date.getDate() : date.getDate()}/${date.getMonth() < 10 ? '0'+date.getMonth() : date.getMonth()}/${date.getFullYear()} ${date.getHours() < 10 ? '0'+date.getHours() : date.getHours()}:${date.getMinutes() < 10 ? '0'+date.getMinutes() : date.getMinutes()}:${date.getSeconds() < 10 ? '0'+date.getSeconds() : date.getSeconds()}`;
         },
-        // funzione per farm apparire e scomparire le opzioni del singolo messaggio 
-        toggleClass(i){
-            this.contacts[this.activeChat].messages[i].options = !this.contacts[this.activeChat].messages[i].options;
+        // funzione per farm apparire e scomparire le opzioni del singolo messaggio e della chat
+        showOptions(obj){
+            obj.options = !obj.options
         },
         // funzione per nascondere i messaggi
         deleteMessage(i){

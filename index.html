@@ -76,10 +76,14 @@
                             </span>
                         </div>
                     </div>
-                    <div class="icons">
+                    <div class="icons position-relative">
                         <button><i class="fa-sharp fa-solid fa-magnifying-glass"></i></button>
                         <button><i class="fa-solid fa-paperclip"></i></button>
-                        <button><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                        <button @click="showOptions(contacts[activeChat])"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                        <div class="options-chat" v-show="contacts[activeChat].options" @mouseleave="showOptions(contacts[activeChat])">
+                            <button>Svuota chat</button> <br>
+                            <button>Elimina chat</button>
+                        </div>
                     </div>
                 </div>
                 <!-- lista dei messsaggi creata scorrendo l'array dei messaggi, con la funzione di cancella messaggio-->
@@ -87,8 +91,8 @@
                     <div v-for="(item, i) in contacts[activeChat].messages" v-show="item.show" :key="i" class="text-message" :class="item.status">
                         <span>{{item.message}}</span>
                         <span class="time-message">{{item.date.substring(11,16)}}</span>
-                        <button @click="toggleClass(i)"><i class="fa-solid fa-angle-down"></i></button>
-                        <div class="options-message" :class="{'d-none': !item.options}" @mouseleave="toggleClass(i)">
+                        <button @click="showOptions(item)"><i class="fa-solid fa-angle-down"></i></button>
+                        <div class="options-message" v-show="item.options" @mouseleave="showOptions(item)">
                             <button>Info</button> <br>
                             <button @click="deleteMessage(i)">Cancella</button>
                         </div>
