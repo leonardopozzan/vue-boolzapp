@@ -6,6 +6,7 @@ const app = createApp({
             activeChat: -1,
             searchTerm: '',
             pcStatus: '',
+            dark: false,
             randomAnswer : ["sono d'accordo", "non ho voglia oggi", "ho tempo solo nel weekend", "domani sera ho un compleanno",
                             "domenica sera sarebbe perfetto", "ho preso ferie, possiamo andare a Parigi", "mi raccomando non dire nulla a mia moglie"],
             rubrica : ['Alberto','Alessandra','Andrea','Anna','Antonio','Arianna','Beatrice','Carlotta','Claudio','Daniela','Davide','Denis','Denise','Diego','Elena','Enrico','Federica','Francesco','Gaia','Giulio','Ilaria','Laura','Luca','Marco','Mattia','Paolo','Roberta','Silvia','Valeria'],
@@ -345,16 +346,20 @@ const app = createApp({
             this.contacts[this.activeChat].messages[i].show = false;
             this.contacts[this.activeChat].messages[i].message = '';
         },
+        //elimna tutta la chat
         deleteChat(){
             this.contacts.splice(this.activeChat,1);
             this.activeChat = -1;
         },
+        //apri la rubrica
         openMenu(){
             this.activeChat = -2;
         },
+        //torna indietro alla lista delle chat
         back(){
             this.activeChat = -1;
         },
+        // crea una nuova chat 
         newChat(name){
             const newChat = {
                 id: id++,
@@ -367,22 +372,14 @@ const app = createApp({
             }
             this.contacts.unshift(newChat);
             this.activeChat = 0;
+        },
+        //attiva la dark mode
+        darkMode(){
+            this.dark = !this.dark;
+            console.log(this.dark)
         }
     }
 })
 
 app.mount('#app')
 
-const splash = createApp({
-    data(){
-        return{
-            
-        }
-    },
-    mounted(){
-        setTimeout(function(){ window.location = 'page2.html'}, 3000);
-        return
-    }
-})
-
-splash.mount('#splash')
