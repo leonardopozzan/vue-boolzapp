@@ -308,7 +308,7 @@ img{
 .options-leave-to {
     opacity: 0.4;
 }
-/* slide dei contenitori a sinistra e destra dell'app */
+/* slide del contenitore a desra e destra dell'app */
 .slide-fade-chat-enter-active {
     transition: all 0.5s ease-out;
 }
@@ -320,5 +320,19 @@ img{
 }
 .slide-fade-chat-enter-from{
     transform: translateX(50px);
+    opacity: 0.6;
+}
+/* slide del contenitore a sinistra e destra dell'app */
+.slide-fade-menu-enter-active {
+    transition: all 0.5s ease-out;
+}
+.slide-fade-menu-leave-active {
+    transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-fade-menu-leave-to{
+    opacity: 0.6;
+}
+.slide-fade-menu-enter-from{
+    transform: translateX(-50px);
     opacity: 0.6;
 }
