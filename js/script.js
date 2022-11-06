@@ -357,7 +357,7 @@ const app = createApp({
         },
         newChat(name){
             const newChat = {
-                id: this.id++,
+                id: id++,
                 name: name,
                 avatar: '_3',
                 visible: true,
@@ -372,3 +372,17 @@ const app = createApp({
 })
 
 app.mount('#app')
+
+const splash = createApp({
+    data(){
+        return{
+            
+        }
+    },
+    mounted(){
+        setTimeout(function(){ window.location = 'page2.html'}, 3000);
+        return
+    }
+})
+
+splash.mount('#splash')
