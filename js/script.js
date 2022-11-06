@@ -3,7 +3,7 @@ let id = 0;
 const app = createApp({
     data(){
         return{
-            activeChat: 0,
+            activeChat: -1,
             searchTerm: '',
             pcStatus: '',
             randomAnswer : ["sono d'accordo", "non ho voglia oggi", "ho tempo solo nel weekend", "domani sera ho un compleanno",
@@ -271,7 +271,12 @@ const app = createApp({
             }
             this.contacts[this.activeChat].newMessage = '';
             // chiamo l'invio della risposta dopo 2 secondi circa
-            setTimeout(this.sendAnswer,2500)
+            setTimeout(this.sendAnswer,2500);
+            //visualizza ultimo messaggio della chat
+            this.$nextTick(()=> { 
+                const lastMsg = this.$refs.msg[this.$refs.msg.length -1];
+                lastMsg.scrollIntoView({behavior : 'smooth'});
+            })
         },
         // funzione che risponde ai messaggi
         sendAnswer(){
@@ -291,7 +296,12 @@ const app = createApp({
             this.contacts[this.activeChat].messages.push(newObjMessage);
             // cambio lo status della chat in Online e dopo un paio di secondi ripsristino l'ultimo accesso
             this.pcStatus = 'Online';
-            setTimeout(()=> this.contacts[this.activeChat].visible = true,2000)
+            setTimeout(()=> this.contacts[this.activeChat].visible = true,2000);
+            //visualizza ultimo messaggio della chat
+            this.$nextTick(()=> { 
+                const lastMsg = this.$refs.msg[this.$refs.msg.length -1];
+                lastMsg.scrollIntoView({behavior : 'smooth'});
+            })
         },
         // funzione che resitituisce l'oggetto contenente l'ultimo messaggio filtrando l'array dei messaggi tra quelli ricevuti e quelli non cancellati
         getLastMessageReceived(item){
@@ -333,6 +343,10 @@ const app = createApp({
         deleteMessage(i){
             this.contacts[this.activeChat].messages[i].show = false;
             this.contacts[this.activeChat].messages[i].message = '';
+        },
+        deleteChat(){
+            this.contacts.splice(this.activeChat,1);
+            this.activeChat = -1;
         }
     }
 })

@@ -139,6 +139,17 @@ img{
     overflow: hidden;
 }
 /*************************** Messaggi a destra *****************************/
+/* finestra di default se non ci sono chat selezionate  */
+.opening-image{
+    background-image: url(../img/sfondo-default.jpg);
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+    color: var(--white);
+    text-align: center;
+    padding-top: 60px;
+}
 .options-chat{
     position: absolute;
     right: 5px; top: 45px;
