@@ -54,18 +54,10 @@ img{
 /*************************** Splash Page *****************************/
 .splash-page{
     height: 100vh;
-    background-color: #222E35;
-    filter: invert(1);
-}
-.loading{
-    height: 60%;
-    width: 70%;
-    border-radius: 100px;
-    background-color: #141c20;
+    background-color: #098f1b;
 }
 .logo{
     width: 150px;
-    filter: invert(1);
 }
 .circle{
     width: 150px;
@@ -78,8 +70,36 @@ img{
     animation: rotation 15s linear infinite;
 }
 @keyframes rotation {
-    from{transform: rotate(3600deg);}
-    to{transform: rotate(0deg);}
+    from{transform: rotate(0deg);}
+    to{transform: rotate(3600deg);}
+}
+.loading-animation {
+    display: flex;
+}
+.cog {
+    animation-name: loading-spin;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+.loading-big {
+    font-size: 108px;
+    margin-bottom: 15px;
+    animation-duration: 3s;
+}
+.loading-small {
+    font-size: 60px;
+    align-self: flex-end;
+    margin-left: -10px;
+    animation-duration: 2s;
+    animation-direction: reverse;
+}
+@keyframes loading-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 /*************************** Dark Mode *****************************/
 .dark-mode{
@@ -112,7 +132,7 @@ img{
     content: '\f186';
     font: var(--fa-font-regular);
     text-align: center;
-    line-height: 23px;
+    line-height: 24px;
 }
 .toggle-switch:before {
     display: block;

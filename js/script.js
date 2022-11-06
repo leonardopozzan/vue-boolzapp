@@ -364,7 +364,7 @@ const app = createApp({
             const newChat = {
                 id: id++,
                 name: name,
-                avatar: '_3',
+                avatar: '_6',
                 visible: true,
                 options: false,
                 newMessage: '',
