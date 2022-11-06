@@ -34,7 +34,21 @@ img{
     align-items: center;
     justify-content: center;
 }
-
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    overflow: overlay
+}
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 1); 
+    background: rgb(83, 83, 83); 
+    border-radius: 10px;
+    overflow: overlay
+}
+::-webkit-scrollbar-thumb {
+    background: lightgrey;
+    border-radius: 10px;
+}
 /*************************** lista chat a sinistra *****************************/
 .menu-chat{
     border-right: 1px solid var(--grey-500);
@@ -153,7 +167,25 @@ img{
 }
 /* sezione dedicata alla creazione di una nuova chat  */
 .new-chat-menu{
-
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: var(--white);
+    position: relative;
+}
+.new-chat-menu .header{
+    position: sticky;
+    top: 0; left: 0;
+    width: 100%;
+}
+.name-contacts{
+    padding: 10px;
+    border-bottom: 1px solid black;
+    cursor: pointer;
+}
+.new-chat-menu .header button{
+    border: 0;
+    background-color: transparent;
 }
 /*************************** Messaggi a destra *****************************/
 /* finestra di default se non ci sono chat selezionate  */
@@ -277,16 +309,16 @@ img{
     opacity: 0.4;
 }
 /* slide dei contenitori a sinistra e destra dell'app */
-.slide-fade-enter-active {
+.slide-fade-chat-enter-active {
     transition: all 0.5s ease-out;
 }
-.slide-fade-leave-active {
+.slide-fade-chat-leave-active {
     transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
 }
-.slide-fade-leave-to{
+.slide-fade-chat-leave-to{
     opacity: 0.6;
 }
-.slide-fade-enter-from{
+.slide-fade-chat-enter-from{
     transform: translateX(50px);
     opacity: 0.6;
 }

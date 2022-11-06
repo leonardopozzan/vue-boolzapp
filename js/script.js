@@ -8,6 +8,7 @@ const app = createApp({
             pcStatus: '',
             randomAnswer : ["sono d'accordo", "non ho voglia oggi", "ho tempo solo nel weekend", "domani sera ho un compleanno",
                             "domenica sera sarebbe perfetto", "ho preso ferie, possiamo andare a Parigi", "mi raccomando non dire nulla a mia moglie"],
+            rubrica : ['Alberto','Alessandra','Andrea','Anna','Antonio','Arianna','Beatrice','Carlotta','Claudio','Daniela','Davide','Denis','Denise','Diego','Elena','Enrico','Federica','Francesco','Gaia','Giulio','Ilaria','Laura','Luca','Marco','Mattia','Paolo','Roberta','Silvia','Valeria'],
             contacts: [
                 {
                     id:id++,
@@ -348,8 +349,24 @@ const app = createApp({
             this.contacts.splice(this.activeChat,1);
             this.activeChat = -1;
         },
-        newChat(){
-
+        openMenu(){
+            this.activeChat = -2;
+        },
+        back(){
+            this.activeChat = -1;
+        },
+        newChat(name){
+            const newChat = {
+                id: this.id++,
+                name: name,
+                avatar: '_3',
+                visible: true,
+                options: false,
+                newMessage: '',
+                messages: [],
+            }
+            this.contacts.unshift(newChat);
+            this.activeChat = 0;
         }
     }
 })
