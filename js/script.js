@@ -347,6 +347,9 @@ const app = createApp({
         deleteChat(){
             this.contacts.splice(this.activeChat,1);
             this.activeChat = -1;
+        },
+        newChat(){
+
         }
     }
 })

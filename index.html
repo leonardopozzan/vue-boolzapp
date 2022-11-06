@@ -16,7 +16,7 @@
         <!-- container generale di tutta l'app -->
         <div id="app" class="d-flex">
             <!-- menu di sinistra con la lista delle chat -->
-            <div class="menu-chat col-md-6 col-lg-4" v-if="!!contacts">
+            <div class="menu-chat col-md-6 col-lg-4" v-if="activeChat >= -1">
                 <!-- foto e opzione dell'account personale -->
                 <div class="header">
                     <div class="my-flex">   
@@ -45,7 +45,7 @@
                     <input type="text" v-model="searchTerm" placeholder="Cerca o inizia una nuova chat" class="flex-grow-1">
                 </div>
                 <!-- lista delle chat creato scorrendo la copia dell'array originale filtrato attraverso il campo di input qui sopra-->
-                <div class="list-chat">
+                <div class="list-chat" v-if="!!contacts">
                     <div v-for="(contact, i) in filteredContacts" :key="i" class="chat" @click="showChat(contact.id)" :class="{ 'chat-active' : activeChat >= 0 && contact.id == contacts[activeChat].id}">
                         <div class="pic-profile">
                             <img :src="`img/avatar${contact.avatar}.jpg`">
@@ -58,59 +58,71 @@
                         <div class="time-chat">{{getLastAccess(contact).date.substring(11,16)}}</div>
                     </div>
                 </div>
+                <div class="icon-new-chat">
+                    <button @click="newChat()"><i class="fa-brands fa-rocketchat fs-3"></i></button>
+                </div>
+            </div>
+            <div v-else class="new-chat-menu">
+                jlbwfwe
             </div>
             <!-- sezione della chat selezionata -->
-            <div class="messages col-md-6 col-lg-8" v-if="activeChat >= 0">
-                <!-- foto profilo, ultimo accesso e opzioni della chat -->
-                <div class="header my-flex ps-2">
-                    <div class="my-flex">
-                        <div class="my-pic-profile"><img :src="`img/avatar${contacts[activeChat].avatar}.jpg`"></div>
-                        <div class="ms-2">
-                            <span><b>{{contacts[activeChat].name}}</b></span> <br>
-                            <span v-if="contacts[activeChat].visible">Ultimo accesso oggi alle {{getLastAccess(contacts[activeChat]).date.substring(11,16)}}</span>
-                            <span v-else :class="{'boing' : pcStatus == 'sta scrivendo'}">
-                                {{pcStatus}}
-                                <span class="ball" style="--item:1"></span>
-                                <span class="ball" style="--item:2"></span>
-                                <span class="ball" style="--item:3"></span>
-                            </span>
+            <transition name="slide-fade" mode="out-in">
+                <div class="messages col-md-6 col-lg-8" v-if="activeChat >= 0">
+                    <!-- foto profilo, ultimo accesso e opzioni della chat -->
+                    <div class="header my-flex ps-2">
+                        <div class="my-flex">
+                            <div class="my-pic-profile"><img :src="`img/avatar${contacts[activeChat].avatar}.jpg`"></div>
+                            <div class="ms-2">
+                                <span><b>{{contacts[activeChat].name}}</b></span> <br>
+                                <span v-if="contacts[activeChat].visible">Ultimo accesso oggi alle {{getLastAccess(contacts[activeChat]).date.substring(11,16)}}</span>
+                                <span v-else :class="{'boing' : pcStatus == 'sta scrivendo'}">
+                                    {{pcStatus}}
+                                    <span class="ball" style="--item:1"></span>
+                                    <span class="ball" style="--item:2"></span>
+                                    <span class="ball" style="--item:3"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="icons position-relative">
+                            <button><i class="fa-sharp fa-solid fa-magnifying-glass"></i></button>
+                            <button><i class="fa-solid fa-paperclip"></i></button>
+                            <button @click="showOptions(contacts[activeChat])"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                            <transition name="options">
+                                <div class="options-chat" v-show="contacts[activeChat].options" @mouseleave="showOptions(contacts[activeChat])" @click="showOptions(contacts[activeChat])">
+                                    <button @click="for(let i = 0; i < contacts[activeChat].messages.length; i++){deleteMessage(i)}">Svuota chat</button> <br>
+                                    <button @click="deleteChat()">Elimina chat</button>
+                                </div>
+                            </transition>
                         </div>
                     </div>
-                    <div class="icons position-relative">
-                        <button><i class="fa-sharp fa-solid fa-magnifying-glass"></i></button>
-                        <button><i class="fa-solid fa-paperclip"></i></button>
-                        <button @click="showOptions(contacts[activeChat])"><i class="fa-solid fa-ellipsis-vertical"></i></button>
-                        <div class="options-chat" v-show="contacts[activeChat].options" @mouseleave="showOptions(contacts[activeChat])" @click="showOptions(contacts[activeChat])">
-                            <button @click="for(let i = 0; i < contacts[activeChat].messages.length; i++){deleteMessage(i)}">Svuota chat</button> <br>
-                            <button @click="deleteChat()">Elimina chat</button>
+                    <!-- lista dei messsaggi creata scorrendo l'array dei messaggi, con la funzione di cancella messaggio-->
+                    <div class="inner-messages">
+                        <div v-for="(item, i) in contacts[activeChat].messages" v-show="item.show" :key="i" class="text-message" :class="item.status" ref="msg">
+                            <span>{{item.message}}</span>
+                            <span class="time-message">{{item.date.substring(11,16)}}</span>
+                            <button @click="showOptions(item)"><i class="fa-solid fa-angle-down"></i></button>
+                            <transition name="options">
+                                <div class="options-message" v-show="item.options" @mouseleave="showOptions(item)">
+                                    <button>Info</button> <br>
+                                    <button @click="deleteMessage(i)">Cancella</button>
+                                </div>
+                            </transition>
                         </div>
                     </div>
-                </div>
-                <!-- lista dei messsaggi creata scorrendo l'array dei messaggi, con la funzione di cancella messaggio-->
-                <div class="inner-messages">
-                    <div v-for="(item, i) in contacts[activeChat].messages" v-show="item.show" :key="i" class="text-message" :class="item.status" ref="msg">
-                        <span>{{item.message}}</span>
-                        <span class="time-message">{{item.date.substring(11,16)}}</span>
-                        <button @click="showOptions(item)"><i class="fa-solid fa-angle-down"></i></button>
-                        <div class="options-message" v-show="item.options" @mouseleave="showOptions(item)">
-                            <button>Info</button> <br>
-                            <button @click="deleteMessage(i)">Cancella</button>
-                        </div>
+                    <!-- sezione dell'invio dei messaggi -->
+                    <div class="footer my-flex p-3">
+                        <button><i class="fa-regular fa-face-smile fs-4"></i></button>
+                        <input v-model="contacts[activeChat].newMessage" @keyup.enter="sendMessage()" type="text" class="flex-grow-1 fs-5 mx-1 rounded-2 border-0" placeholder="Scrivi un messaggio">
+                        <button @click="sendMessage()" v-if="!!contacts[activeChat].newMessage"><i class="fa-solid fa-paper-plane fs-4"></i></button>
+                        <button v-else><i class="fa-solid fa-microphone fs-4"></i></button>
                     </div>
                 </div>
-                <!-- sezione dell'invio dei messaggi -->
-                <div class="footer my-flex p-3">
-                    <button><i class="fa-regular fa-face-smile fs-4"></i></button>
-                    <input v-model="contacts[activeChat].newMessage" @keyup.enter="sendMessage()" type="text" class="flex-grow-1 fs-5 mx-1 rounded-2 border-0" placeholder="Scrivi un messaggio">
-                    <button @click="sendMessage()" v-if="!!contacts[activeChat].newMessage"><i class="fa-solid fa-paper-plane fs-4"></i></button>
-                    <button v-else><i class="fa-solid fa-microphone fs-4"></i></button>
+                <div v-else class="messages col-md-6 col-lg-8">
+                    <div class="opening-image">
+                        <h1>Benvenuto su Whatsapp</h1>
+                    </div>
                 </div>
-            </div>
-            <div v-else class="messages col-md-6 col-lg-8">
-                <div class="opening-image">
-                    <h1>Benvenuto su Whatsapp</h1>
-                </div>
-            </div>
+            </transition>
         </div>
     </div>
 </body>

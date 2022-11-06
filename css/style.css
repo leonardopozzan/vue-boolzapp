@@ -39,6 +39,7 @@ img{
 .menu-chat{
     border-right: 1px solid var(--grey-500);
     background-color: var(--white);
+    position: relative;
 }
 .menu-chat > *{
     padding: 5px   ;
@@ -138,6 +139,22 @@ img{
     height: 50px;
     overflow: hidden;
 }
+/* icona per creare una nuova chat */
+.icon-new-chat{
+    position: absolute;
+    bottom: 10px; right: 20px;
+    overflow: hidden;
+}
+.icon-new-chat button{
+    border: 0;
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    background-color: #46C456;
+}
+/* sezione dedicata alla creazione di una nuova chat  */
+.new-chat-menu{
+
+}
 /*************************** Messaggi a destra *****************************/
 /* finestra di default se non ci sono chat selezionate  */
 .opening-image{
@@ -234,6 +251,7 @@ img{
     color: var(--grey-600);
 }
 /*************************** Animazioni *****************************/
+/* puntini di sta scrivendo... */
 .boing .ball{
     display: inline-block;
     width: 5px; height: 5px;
@@ -246,4 +264,29 @@ img{
     0%   { transform: translateY(0); }
     50%  { transform: translateY(-6px); }
     100% { transform: translateY(0); }
+}
+/* ingresso delle opzioni  */
+/* we will explain what these classes do next! */
+.options-enter-active,
+.options-leave-active {
+    transition: opacity 0.3s ease;
+}
+
+.options-enter-from,
+.options-leave-to {
+    opacity: 0.4;
+}
+/* slide dei contenitori a sinistra e destra dell'app */
+.slide-fade-enter-active {
+    transition: all 0.5s ease-out;
+}
+.slide-fade-leave-active {
+    transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-fade-leave-to{
+    opacity: 0.6;
+}
+.slide-fade-enter-from{
+    transform: translateX(50px);
+    opacity: 0.6;
 }
