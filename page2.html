@@ -18,24 +18,43 @@
             <div  class="d-flex app">
                 <!-- menu di sinistra con la lista delle chat -->
                 <transition name="slide-fade-menu" mode="out-in">
-                    <div class="menu-chat col-md-6 col-lg-4" v-if="activeChat >= -1">
+                    <div class="menu-chat col-md-5 col-lg-4" v-if="activeChat >= -1">
                         <!-- foto e opzione dell'account personale -->
-                        <div class="header">
+                        <div class="header position-relative">
                             <div class="my-flex">
                                 <div class="my-pic-profile" :class="{'dark-mode' : dark}"><img src="img/avatar_io.jpg"></div>
                                 <span><b>Sofia</b></span>
                             </div>
-                            <div class="icons position-relative">
+                            <div class="icons position-relative d-none d-lg-block">
                                 <label class="toggle" >
                                     <input class="toggle-checkbox" type="checkbox">
                                     <div @click="darkMode()" class="toggle-switch" :class="{'moon' : dark}"></div>
                                     <span class="toggle-label"></span>
                                 </label>
                                 <button><a href="index.html"><i class="fa-solid fa-circle-notch"></i></a></button>
-                                <button @click="showOptions(optionsObj)"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                                <button @click="showOptions(optionsProfile)"><i class="fa-solid fa-ellipsis-vertical"></i></button>
                                 <transition name="options">
-                                    <div class="options-profile" v-show="optionsObj.options" @mouseleave="showOptions(optionsObj)">
+                                    <div class="options-profile" v-show="optionsProfile.options" @mouseleave="showOptions(optionsProfile)">
                                         <button @click=";while(contacts.length > 0){deleteChat(0)}">Elimina tutte le chat</button>
+                                    </div>
+                                </transition>
+                            </div>
+                            <div class="d-lg-none icons">
+                                <button @click="showOptions(optionsHamApp)"><i class="fa-solid fa-bars"></i></button>
+                                <transition name="options">
+                                    <div class="icons hamburger-menu my-flex" v-show="optionsHamApp.options"  @mouseleave="showOptions(optionsHamApp)">
+                                        <label class="toggle" >
+                                            <input class="toggle-checkbox" type="checkbox">
+                                            <div @click="darkMode()" class="toggle-switch" :class="{'moon' : dark}"></div>
+                                            <span class="toggle-label"></span>
+                                        </label>
+                                        <button><a href="index.html"><i class="fa-solid fa-circle-notch"></i></a></button>
+                                        <button @click="showOptions(optionsProfile)"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                                        <transition name="options">
+                                            <div class="options-profile" v-show="optionsProfile.options" @mouseleave="showOptions(optionsProfile)">
+                                                <button @click=";while(contacts.length > 0){deleteChat(0)}">Elimina tutte le chat</button>
+                                            </div>
+                                        </transition>
                                     </div>
                                 </transition>
                             </div>
@@ -85,9 +104,9 @@
                 </transition>
                 <!-- sezione della chat selezionata -->
                 <transition name="slide-fade-chat" mode="out-in">
-                    <div class="messages col-md-6 col-lg-8" v-if="activeChat >= 0">
+                    <div class="messages col-md-7 col-lg-8" v-if="activeChat >= 0">
                         <!-- foto profilo, ultimo accesso e opzioni della chat -->
-                        <div class="header my-flex ps-2">
+                        <div class="header my-flex ps-2 position-relative">
                             <div class="my-flex">
                                 <div class="my-pic-profile" :class="{'dark-mode' : dark}"><img :src="`img/avatar${contacts[activeChat].avatar}.jpg`"></div>
                                 <div class="ms-2">
@@ -101,7 +120,7 @@
                                     </span>
                                 </div>
                             </div>
-                            <div class="icons position-relative">
+                            <div class="icons position-relative d-none d-lg-block">
                                 <button><i class="fa-sharp fa-solid fa-magnifying-glass"></i></button>
                                 <button><i class="fa-solid fa-paperclip"></i></button>
                                 <button @click="showOptions(contacts[activeChat])"><i class="fa-solid fa-ellipsis-vertical"></i></button>
@@ -109,6 +128,22 @@
                                     <div class="options-chat" v-show="contacts[activeChat].options" @mouseleave="showOptions(contacts[activeChat])" @click="showOptions(contacts[activeChat])">
                                         <button @click="for(let i = 0; i < contacts[activeChat].messages.length; i++){deleteMessage(i)}">Svuota chat</button> <br>
                                         <button @click="deleteChat(activeChat)">Elimina chat</button>
+                                    </div>
+                                </transition>
+                            </div>
+                            <div class="d-lg-none icons">
+                                <button @click="showOptions(optionsHamChat)"><i class="fa-solid fa-bars"></i></button>
+                                <transition name="options">
+                                    <div class="icons hamburger-menu my-flex" v-show="optionsHamChat.options"  @mouseleave="showOptions(optionsHamChat)">
+                                        <button><i class="fa-sharp fa-solid fa-magnifying-glass"></i></button>
+                                        <button><i class="fa-solid fa-paperclip"></i></button>
+                                        <button @click="showOptions(contacts[activeChat])"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                                        <transition name="options">
+                                            <div class="options-chat" v-show="contacts[activeChat].options" @mouseleave="showOptions(contacts[activeChat])">
+                                                <button @click="for(let i = 0; i < contacts[activeChat].messages.length; i++){deleteMessage(i)}">Svuota chat</button> <br>
+                                                <button @click="deleteChat(activeChat);showOptions(optionsHamChat)">Elimina chat</button>
+                                            </div>
+                                        </transition>
                                     </div>
                                 </transition>
                             </div>
