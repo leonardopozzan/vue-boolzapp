@@ -10,6 +10,7 @@ const app = createApp({
             optionsHamApp: {options: false},
             optionsHamChat: {options: false},
             optionsProfile: {options: false},
+            optionsView: {options: false},
             randomAnswer : ["sono d'accordo", "non ho voglia oggi", "ho tempo solo nel weekend", "domani sera ho un compleanno",
                             "domenica sera sarebbe perfetto", "ho preso ferie, possiamo andare a Parigi", "mi raccomando non dire nulla a mia moglie"],
             rubrica : ['Alberto','Alessandra','Andrea','Anna','Antonio','Arianna','Beatrice','Carlotta','Claudio','Daniela','Davide','Denis','Denise','Diego','Elena','Enrico','Federica','Francesco','Gaia','Giulio','Ilaria','Laura','Luca','Marco','Mattia','Paolo','Roberta','Silvia','Valeria'],
@@ -332,7 +333,7 @@ const app = createApp({
                     message: '',
                     status: 'received',
                     options: false
-                    }
+                }
             }
             return messagesReceived[messagesReceived.length -1];
         },

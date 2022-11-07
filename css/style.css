@@ -306,7 +306,6 @@ img{
 }
 /* sezione dedicata alla creazione di una nuova chat  */
 .new-chat-menu{
-    width: 100%;
     height: 100%;
     overflow: auto;
     background-color: var(--white);
@@ -487,5 +486,10 @@ img{
     }
     .received{
         margin-left: 1rem;
+    }
+}
+@media screen and (max-width:768px) {
+    .my-d-none{
+        display: none;
     }
 }
