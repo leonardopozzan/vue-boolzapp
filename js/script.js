@@ -11,6 +11,53 @@ const app = createApp({
             optionsHamChat: {options: false},
             optionsProfile: {options: false},
             optionsView: {options: false},
+            optionsEmoji: {options: false},
+            icons:[
+                '&#128512;',
+                '&#128513;',
+                '&#128514;',
+                '&#128515;',
+                '&#128516;',
+                '&#128517;',
+                '&#128518;',
+                '&#128519;',
+                '&#128521;',
+                '&#128522;',
+                '&#128523;',
+                '&#128524;',
+                '&#128525;',
+                '&#128526;',
+                '&#128528;',
+                '&#128529;',
+                '&#128530;',
+                '&#128536;',
+                '&#128545;',
+                '&#128548;',
+                '&#128561;',
+                '&#129315;',
+                '&#129299;',
+                '&#129319;',
+                '&#129321;',
+                '&#129325;',
+                '&#129488;',
+                '&#9996;',
+                '&#9995;',
+                '&#10024;',
+                '&#10062;',
+                '&#128064;',
+                '&#128077;',
+                '&#128079;',
+                '&#128152;',
+                '&#128149;',
+                '&#128156;',
+                '&#128158;',
+                '&#128584;',
+                '&#129310;',
+                '&#129505;',
+                '&#127802;',
+                '&#127801;',
+                '&#9749;'
+            ],
             randomAnswer : ["sono d'accordo", "non ho voglia oggi", "ho tempo solo nel weekend", "domani sera ho un compleanno",
                             "domenica sera sarebbe perfetto", "ho preso ferie, possiamo andare a Parigi", "mi raccomando non dire nulla a mia moglie"],
             rubrica : ['Alberto','Alessandra','Andrea','Anna','Antonio','Arianna','Beatrice','Carlotta','Claudio','Daniela','Davide','Denis','Denise','Diego','Elena','Enrico','Federica','Francesco','Gaia','Giulio','Ilaria','Laura','Luca','Marco','Mattia','Paolo','Roberta','Silvia','Valeria'],
@@ -380,6 +427,9 @@ const app = createApp({
         //attiva la dark mode
         darkMode(){
             this.dark = !this.dark;
+        },
+        enterEmoji(icon){
+            this.contacts[this.activeChat].newMessage += icon;
         }
     }
 })
