@@ -25,15 +25,19 @@
                                 <div class="my-pic-profile" :class="{'dark-mode' : dark}"><img src="img/avatar_io.jpg"></div>
                                 <span><b>Sofia</b></span>
                             </div>
-                            <div class="icons">
+                            <div class="icons position-relative">
                                 <label class="toggle" >
                                     <input class="toggle-checkbox" type="checkbox">
                                     <div @click="darkMode()" class="toggle-switch" :class="{'moon' : dark}"></div>
                                     <span class="toggle-label"></span>
                                 </label>
                                 <button><a href="index.html"><i class="fa-solid fa-circle-notch"></i></a></button>
-                                <button><i class="fa-solid fa-ellipsis-vertical"></i></button>
-                                <div></div>
+                                <button @click="showOptions(optionsObj)"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                                <transition name="options">
+                                    <div class="options-profile" v-show="optionsObj.options" @mouseleave="showOptions(optionsObj)">
+                                        <button @click=";while(contacts.length > 0){deleteChat(0)}">Elimina tutte le chat</button>
+                                    </div>
+                                </transition>
                             </div>
                         </div>
                         <!-- sezione per l'attivazione delle notifiche -->
@@ -52,7 +56,7 @@
                             <input type="text" v-model="searchTerm" placeholder="Cerca o inizia una nuova chat" class="flex-grow-1">
                         </div>
                         <!-- lista delle chat creato scorrendo la copia dell'array originale filtrato attraverso il campo di input qui sopra-->
-                        <div class="list-chat" v-if="!!contacts">
+                        <div class="list-chat" v-if="contacts.length > 0">
                             <div v-for="(contact, i) in filteredContacts" :key="i" class="chat" @click="showChat(contact.id)" :class="{ 'chat-active' : activeChat >= 0 && contact.id == contacts[activeChat].id}">
                                 <div class="pic-profile" :class="{'dark-mode' : dark}">
                                     <img :src="`img/avatar${contact.avatar}.jpg`">
@@ -104,7 +108,7 @@
                                 <transition name="options">
                                     <div class="options-chat" v-show="contacts[activeChat].options" @mouseleave="showOptions(contacts[activeChat])" @click="showOptions(contacts[activeChat])">
                                         <button @click="for(let i = 0; i < contacts[activeChat].messages.length; i++){deleteMessage(i)}">Svuota chat</button> <br>
-                                        <button @click="deleteChat()">Elimina chat</button>
+                                        <button @click="deleteChat(activeChat)">Elimina chat</button>
                                     </div>
                                 </transition>
                             </div>

@@ -198,6 +198,17 @@ img{
     overflow: hidden;
     background-color: var(--white);
 }
+/* opzioni del profil personale */
+.options-profile{
+    position: absolute;
+    bottom: -35px; right: -12px;
+    width: 160px;
+}
+.options-profile button{
+    border: 1px solid black;
+    background-color: var(--white);
+    padding: 5px;
+}
 /*barra per impostare le notifiche*/
 .notify{
     background-color: var(--light-blue);
